@@ -1,4 +1,5 @@
 import numpy as np
+import matplotlib.pyplot as plt
 
 
 class Maze:
@@ -14,6 +15,11 @@ class Maze:
     def find_shortest_path(self):
         pass
 
+    def draw_maze(self):
+        plt.figure()
+        plt.imshow(self.data, cmap="binary")
+        plt.show()
+
 
 def load_maze_csv(file_name):
     data = np.genfromtxt(file_name, delimiter=",")
@@ -26,3 +32,5 @@ def generate_maze():
 
 data = load_maze_csv("./data/maze_5.csv")
 print(data)
+maze = Maze(data)
+maze.draw_maze()
