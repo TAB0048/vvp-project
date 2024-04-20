@@ -6,8 +6,18 @@ import heapq
 
 
 class Maze:
-    def __init__(self, data):
+    def __init__(self, data=None):
         self.data = data
+        if data is None:
+            self.start = None
+            self.end = None
+        else:
+            self.start = 0
+            self.end = data.shape[0] * data.shape[0] - 1
+
+    def load_maze_csv(self, file_name):
+        data = np.genfromtxt(file_name, delimiter=",")
+        self.data = data.astype(bool)
         self.start = 0
         self.end = data.shape[0] * data.shape[0] - 1
 
@@ -77,7 +87,11 @@ class Maze:
 
     def draw_maze(self):
         plt.figure()
+        plt.imshow(self.data, cmap="binary")
+        plt.show()
 
+    def draw_maze_path(self):
+        plt.figure()
         plt.imshow(self.data, cmap="binary")  # maze
 
         shortest_path = self.find_shortest_path()
@@ -91,15 +105,18 @@ class Maze:
         plt.show()
 
 
-def load_maze_csv(file_name):
-    data = np.genfromtxt(file_name, delimiter=",")
-    return data.astype(bool)
-
-
 def generate_maze():
     pass
 
 
-data = load_maze_csv("./data/maze_3.csv")
-maze = Maze(data)
+maze = Maze()
+print(maze.data)
+print(maze.start)
+print(maze.end)
+maze.load_maze_csv("./data/maze_3.csv")
+print(maze.data)
+print(maze.start)
+print(maze.end)
+
 maze.draw_maze()
+maze.draw_maze_path()
