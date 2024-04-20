@@ -105,18 +105,28 @@ class Maze:
         plt.show()
 
 
-def generate_maze():
-    pass
+class MazeTemplate:
+    @staticmethod
+    def empty(n):
+        return Maze(np.zeros((n, n), dtype=bool))
+
+    @staticmethod
+    def slalom(n):
+        maze = MazeTemplate.empty(n)
+        idx = n//5
+        w = n//10  # width
+        maze.data[0:-idx, idx - w:idx + w] = True
+        maze.data[-idx - 2*w:-idx, idx - w:-2*idx] = True
+
+        maze.data[idx:, -idx - w:-idx + w] = True
+        maze.data[idx: idx + 2*w, 2*idx: -idx + w] = True
+        return maze
 
 
-maze = Maze()
-print(maze.data)
-print(maze.start)
-print(maze.end)
-maze.load_maze_csv("./data/maze_3.csv")
-print(maze.data)
-print(maze.start)
-print(maze.end)
+maze = MazeTemplate.empty(25)
+maze.draw_maze()
+maze.draw_maze_path()
 
+maze = MazeTemplate.slalom(80)
 maze.draw_maze()
 maze.draw_maze_path()
