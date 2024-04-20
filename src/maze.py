@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import scipy.sparse as sparse
+import heapq
 
 
 class Maze:
@@ -30,8 +31,44 @@ class Maze:
                 A[idx, idx] = 0
         return A
 
-    def bfs(self):
-        pass
+    def dijkstra(self):
+        n, m = self.data.shape
+        nodes = n * n
+        distances = np.full(nodes, np.inf)
+        visited = np.full(nodes, False, dtype=bool)
+
+        start = 0
+        end = nodes - 1
+        distances[start] = 0
+        priority_queue = [(0, start)]
+        previous = np.full(nodes, -1, dtype=int)
+
+        incidence_matrix = self.incidence_matrix()
+
+        while priority_queue:
+            d, u = heapq.heappop(priority_queue)
+            if not visited[u]:
+                visited[u] = True
+
+                if u == end:
+                    break
+
+                for v in range(nodes):
+                    if incidence_matrix[u, v] == 1:
+                        alt = distances[u] + 1
+                        if alt < distances[v]:
+                            distances[v] = alt
+                            previous[v] = u
+                            heapq.heappush(priority_queue, (alt, v))
+
+        path = []
+        u = end
+        while u != -1:
+            path.append(u)
+            u = previous[u]
+        path.reverse()
+
+        return path
 
     def find_shortest_path(self):
         pass
@@ -57,8 +94,5 @@ maze = Maze(data)
 maze.draw_maze()
 
 indicence_matrix = maze.incidence_matrix()
-print(indicence_matrix)
-
-plt.figure()
-plt.imshow(indicence_matrix.todense(), cmap="binary")
-plt.show()
+shortest_path = maze.dijkstra()
+print(shortest_path)
