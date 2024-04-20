@@ -21,6 +21,9 @@ class Maze:
         self.start = 0
         self.end = data.shape[0] * data.shape[0] - 1
 
+    def save_maze_csv(self, file_name):
+        np.savetxt(file_name, self.data.astype(int), delimiter=",", fmt="%i")
+
     def incidence_matrix(self):
         n, m = self.data.shape
         A = sparse.lil_matrix((n * n, n * n))
@@ -148,12 +151,11 @@ class MazeTemplate:
         return template
 
 
-# maze = Maze()
-# maze.load_maze_csv("./data/maze_1.csv")
-# maze.draw_maze_path()
+new_maze = MazeTemplate.random_obstacles(MazeTemplate.slalom(20), 50)
+new_maze.draw_maze()
+new_maze.save_maze_csv("new_maze.csv")
 
-empty_maze = MazeTemplate.slalom(30)
-empty_maze.draw_maze()
-
-empty_obstacles = MazeTemplate.random_obstacles(empty_maze, 100)
-empty_obstacles.draw_maze_path()
+maze = Maze()
+maze.load_maze_csv("new_maze.csv")
+maze.draw_maze()
+maze.draw_maze_path()
