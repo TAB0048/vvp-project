@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+from matplotlib.colors import ListedColormap
 import scipy.sparse as sparse
 import heapq
 
@@ -76,7 +77,17 @@ class Maze:
 
     def draw_maze(self):
         plt.figure()
-        plt.imshow(self.data, cmap="binary")
+
+        plt.imshow(self.data, cmap="binary")  # maze
+
+        shortest_path = self.find_shortest_path()
+        path_matrix = np.zeros_like(self.data)
+        row, col = np.divmod(shortest_path, self.data.shape[0])
+        path_matrix[row, col] = 1
+
+        path_colors = ListedColormap([(0, 0, 0, 0), "red"])
+        plt.imshow(path_matrix, cmap=path_colors)  # path
+
         plt.show()
 
 
@@ -89,11 +100,6 @@ def generate_maze():
     pass
 
 
-data = load_maze_csv("./data/maze_5.csv")
-print(data)
+data = load_maze_csv("./data/maze_3.csv")
 maze = Maze(data)
 maze.draw_maze()
-
-indicence_matrix = maze.incidence_matrix()
-shortest_path = maze.find_shortest_path()
-print(shortest_path)
