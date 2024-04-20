@@ -78,10 +78,12 @@ class Maze:
 
         path = []
         u = self.end
-        while u != -1:
-            path.append(u)
-            u = previous[u]
-        path.reverse()
+
+        if previous[u] != -1:
+            while u != -1:
+                path.append(u)
+                u = previous[u]
+            path.reverse()
 
         return path
 
@@ -95,6 +97,11 @@ class Maze:
         plt.imshow(self.data, cmap="binary")  # maze
 
         shortest_path = self.find_shortest_path()
+
+        if shortest_path == []:
+            print("Path doesn't exist.")
+            return
+
         path_matrix = np.zeros_like(self.data)
         row, col = np.divmod(shortest_path, self.data.shape[0])
         path_matrix[row, col] = 1
@@ -123,10 +130,6 @@ class MazeTemplate:
         return maze
 
 
-maze = MazeTemplate.empty(25)
-maze.draw_maze()
-maze.draw_maze_path()
-
-maze = MazeTemplate.slalom(80)
-maze.draw_maze()
+maze = Maze()
+maze.load_maze_csv("./data/maze_1.csv")
 maze.draw_maze_path()
