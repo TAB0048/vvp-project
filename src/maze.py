@@ -7,6 +7,8 @@ import heapq
 class Maze:
     def __init__(self, data):
         self.data = data
+        self.start = 0
+        self.end = data.shape[0] * data.shape[0] - 1
 
     def incidence_matrix(self):
         n, m = self.data.shape
@@ -31,26 +33,22 @@ class Maze:
                 A[idx, idx] = 0
         return A
 
-    def dijkstra(self):
+    def dijkstra(self, incidence_matrix):
         n, m = self.data.shape
         nodes = n * n
         distances = np.full(nodes, np.inf)
-        visited = np.full(nodes, False, dtype=bool)
+        visited = np.full(nodes, False)
 
-        start = 0
-        end = nodes - 1
-        distances[start] = 0
-        priority_queue = [(0, start)]
-        previous = np.full(nodes, -1, dtype=int)
-
-        incidence_matrix = self.incidence_matrix()
+        distances[self.start] = 0
+        priority_queue = [(0, self.start)]
+        previous = np.full(nodes, -1)
 
         while priority_queue:
             d, u = heapq.heappop(priority_queue)
             if not visited[u]:
                 visited[u] = True
 
-                if u == end:
+                if u == self.end:
                     break
 
                 for v in range(nodes):
@@ -61,17 +59,20 @@ class Maze:
                             previous[v] = u
                             heapq.heappush(priority_queue, (alt, v))
 
+        return previous
+
+    def find_shortest_path(self):
+        incidence_matrix = self.incidence_matrix()
+        previous = self.dijkstra(incidence_matrix)
+
         path = []
-        u = end
+        u = self.end
         while u != -1:
             path.append(u)
             u = previous[u]
         path.reverse()
 
         return path
-
-    def find_shortest_path(self):
-        pass
 
     def draw_maze(self):
         plt.figure()
@@ -94,5 +95,5 @@ maze = Maze(data)
 maze.draw_maze()
 
 indicence_matrix = maze.incidence_matrix()
-shortest_path = maze.dijkstra()
+shortest_path = maze.find_shortest_path()
 print(shortest_path)
