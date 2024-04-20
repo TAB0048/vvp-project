@@ -129,7 +129,31 @@ class MazeTemplate:
         maze.data[idx: idx + 2*w, 2*idx: -idx + w] = True
         return maze
 
+    @staticmethod
+    def random_obstacles(template, max_obstacles):
+        tmp_maze = Maze(np.copy(template.data))
+        n, m = template.data.shape
 
-maze = Maze()
-maze.load_maze_csv("./data/maze_1.csv")
-maze.draw_maze_path()
+        for i in range(max_obstacles):
+            x = np.random.randint(0, n)
+            y = np.random.randint(0, n)
+
+            if not tmp_maze.data[x, y]:
+                tmp_maze.data[x, y] = True
+                path = tmp_maze.find_shortest_path()
+
+                if len(path) > 0:
+                    template.data[x, y] = True
+
+        return template
+
+
+# maze = Maze()
+# maze.load_maze_csv("./data/maze_1.csv")
+# maze.draw_maze_path()
+
+empty_maze = MazeTemplate.slalom(30)
+empty_maze.draw_maze()
+
+empty_obstacles = MazeTemplate.random_obstacles(empty_maze, 100)
+empty_obstacles.draw_maze_path()
