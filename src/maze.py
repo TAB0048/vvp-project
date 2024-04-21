@@ -33,16 +33,16 @@ class Maze:
                 idx = i * m + j
 
                 if i > 0 and self.data[i - 1, j] == 0:  # upper neighbour
-                    A[idx, idx - n] = 1
+                    A[idx, idx - n] = 1 if self.data[i, j] == 0 else 0
 
                 if i < n - 1 and self.data[i + 1, j] == 0:  # lower neighbour
-                    A[idx, idx + n] = 1
+                    A[idx, idx + n] = 1 if self.data[i, j] == 0 else 0
 
                 if j > 0 and self.data[i, j - 1] == 0:  # left neighbour
-                    A[idx, idx - 1] = 1
+                    A[idx, idx - 1] = 1 if self.data[i, j] == 0 else 0
 
                 if j < m - 1 and self.data[i, j + 1] == 0:  # right neighbour
-                    A[idx, idx + 1] = 1
+                    A[idx, idx + 1] = 1 if self.data[i, j] == 0 else 0
 
                 A[idx, idx] = 0
         return A
@@ -155,6 +155,8 @@ class MazeTemplate:
         return template
 
 
-new_maze = MazeTemplate.random_obstacles(MazeTemplate.empty(30), 40)
-new_maze.draw_maze()
-new_maze.draw_maze_path()
+maze = Maze()
+maze.load_maze_csv("./data/maze_3.csv")
+maze.draw_maze()
+print(maze.incidence_matrix().todense())
+maze.draw_maze_path()
