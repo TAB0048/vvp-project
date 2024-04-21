@@ -6,7 +6,26 @@ import heapq
 
 
 class Maze:
-    def __init__(self, data: np.ndarray | None = None):
+    """
+    Class representing a maze.
+
+    It contains maze data, it's start position (upper left)
+    and end position (lower right).
+
+    It allows user to load data from and save as CSV file, generate incidence
+    matrix and find shortest path from start to end.
+
+    """
+    def __init__(self, data: np.ndarray | None = None) -> None:
+        """
+        Constructor of the maze object.
+
+        Args:
+            data (np.ndarray | None): he initial data for maze.
+
+        Returns:
+            None
+        """
         self.data = data
         if data is None:
             self.start = None
@@ -16,15 +35,42 @@ class Maze:
             self.end = data.shape[0] * data.shape[0] - 1
 
     def load_maze_csv(self, file_name: str) -> None:
+        """
+        Loads maze data from a CSV file.
+
+        Args:
+            file_name (str): The path to the CSV file with maze data.
+
+        Returns:
+            None
+        """
         data = np.genfromtxt(file_name, delimiter=",")
         self.data = data.astype(bool)
         self.start = 0
         self.end = data.shape[0] * data.shape[0] - 1
 
     def save_maze_csv(self, file_name: str) -> None:
+        """
+        Saves the maze as a CSV file.
+
+        Args:
+            file_name (str): The name of the new CSV file.
+
+        Returns:
+            None
+        """
         np.savetxt(file_name, self.data.astype(int), delimiter=",", fmt="%i")
 
     def incidence_matrix(self) -> sparse.lil_matrix:
+        """
+        Generates an incidence matrix of the maze.
+
+        Args:
+            None
+
+        Returns:
+            sparse.lil_matrix: The incidence matrix of the maze.
+        """
         n, m = self.data.shape
         A = sparse.lil_matrix((n * n, n * n))
 
@@ -48,6 +94,17 @@ class Maze:
         return A
 
     def dijkstra(self, incidence_matrix: sparse.lil_matrix) -> np.ndarray:
+        """
+        Performs the Dijkstra's algorithm to find the shortest path
+        in the maze.
+
+        Args:
+            indicence_matrix (sparse.lil_matrix): The incidence matrix
+                                                  of the maze.
+
+        Returns:
+            np.ndarray: An array containing cells of the shortest path.
+        """
         n, m = self.data.shape
         nodes = n * n
         distances = np.full(nodes, np.inf)
@@ -76,6 +133,16 @@ class Maze:
         return previous
 
     def find_shortest_path(self) -> list:
+        """
+        Finds the shortest path from upper left corner to lower right corner
+        of the maze using incidence matrix and Dijkstra's algorithm.
+
+        Args:
+            None
+
+        Returns:
+            list: A list with incides representing the shortest path.
+        """
         incidence_matrix = self.incidence_matrix()
         previous = self.dijkstra(incidence_matrix)
 
@@ -91,11 +158,17 @@ class Maze:
         return path
 
     def draw_maze(self) -> None:
+        """
+        Creates a picture of the maze only (without any path).
+        """
         plt.figure()
         plt.imshow(self.data, cmap="binary")
         plt.show()
 
     def draw_maze_path(self) -> None:
+        """
+        Creates a picture of the maze, found shortest path included.
+        """
         plt.figure()
         plt.imshow(self.data, cmap="binary")  # maze
 
@@ -116,12 +189,36 @@ class Maze:
 
 
 class MazeTemplate:
+    """
+    Class representing templates for mazes.
+
+    It allows user to generate mazes from templates and add obstacles to it.
+    """
     @staticmethod
     def empty(n: int) -> Maze:
+        """
+        Creates an empty maze with given size.
+
+        Args:
+            n (int): The size of the created maze.
+
+        Returns:
+            Maze: An empty maze with size n x n.
+        """
         return Maze(np.zeros((n, n), dtype=bool))
 
     @staticmethod
     def slalom(n: int) -> Maze:
+        """
+        Creates a maze with two L-shaped obstacles (so that the path
+        is at least S-shaped).
+
+        Args:
+            n (int): The size of the created maze.
+
+        Returns:
+            Maze: A new maze with size n x n and L-shaped obstacles.
+        """
         maze = MazeTemplate.empty(n)
         idx = n//5
         w = n//10  # width
@@ -134,6 +231,17 @@ class MazeTemplate:
 
     @staticmethod
     def random_obstacles(template: Maze, max_obstacles: int) -> Maze:
+        """
+        Generates random obstacles to existing maze template and checks
+        if maze still has solution (path).
+
+        Args:
+            template (Maze): The maze we add obstacles to.
+            max_obstacles (int): The maximum amount of new obstacles.
+
+        Returns:
+            Maze: Modified maze with new obstacles.
+        """
         tmp_maze = Maze(np.copy(template.data))
         n, m = template.data.shape
         obstacles = 0
