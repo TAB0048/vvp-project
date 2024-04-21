@@ -136,8 +136,9 @@ class MazeTemplate:
     def random_obstacles(template, max_obstacles):
         tmp_maze = Maze(np.copy(template.data))
         n, m = template.data.shape
+        obstacles = 0
 
-        for i in range(max_obstacles):
+        while obstacles < max_obstacles:
             x = np.random.randint(0, n)
             y = np.random.randint(0, n)
 
@@ -147,15 +148,13 @@ class MazeTemplate:
 
                 if len(path) > 0:
                     template.data[x, y] = True
+                    obstacles += 1
+                else:
+                    tmp_maze.data[x, y] = False
 
         return template
 
 
-new_maze = MazeTemplate.random_obstacles(MazeTemplate.slalom(20), 50)
+new_maze = MazeTemplate.random_obstacles(MazeTemplate.empty(30), 40)
 new_maze.draw_maze()
-new_maze.save_maze_csv("new_maze.csv")
-
-maze = Maze()
-maze.load_maze_csv("new_maze.csv")
-maze.draw_maze()
-maze.draw_maze_path()
+new_maze.draw_maze_path()
