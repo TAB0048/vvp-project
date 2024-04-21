@@ -6,7 +6,7 @@ import heapq
 
 
 class Maze:
-    def __init__(self, data=None):
+    def __init__(self, data: np.ndarray | None = None):
         self.data = data
         if data is None:
             self.start = None
@@ -15,16 +15,16 @@ class Maze:
             self.start = 0
             self.end = data.shape[0] * data.shape[0] - 1
 
-    def load_maze_csv(self, file_name):
+    def load_maze_csv(self, file_name: str) -> None:
         data = np.genfromtxt(file_name, delimiter=",")
         self.data = data.astype(bool)
         self.start = 0
         self.end = data.shape[0] * data.shape[0] - 1
 
-    def save_maze_csv(self, file_name):
+    def save_maze_csv(self, file_name: str) -> None:
         np.savetxt(file_name, self.data.astype(int), delimiter=",", fmt="%i")
 
-    def incidence_matrix(self):
+    def incidence_matrix(self) -> sparse.lil_matrix:
         n, m = self.data.shape
         A = sparse.lil_matrix((n * n, n * n))
 
@@ -47,7 +47,7 @@ class Maze:
                 A[idx, idx] = 0
         return A
 
-    def dijkstra(self, incidence_matrix):
+    def dijkstra(self, incidence_matrix: sparse.lil_matrix) -> np.ndarray:
         n, m = self.data.shape
         nodes = n * n
         distances = np.full(nodes, np.inf)
@@ -75,7 +75,7 @@ class Maze:
 
         return previous
 
-    def find_shortest_path(self):
+    def find_shortest_path(self) -> list:
         incidence_matrix = self.incidence_matrix()
         previous = self.dijkstra(incidence_matrix)
 
@@ -90,12 +90,12 @@ class Maze:
 
         return path
 
-    def draw_maze(self):
+    def draw_maze(self) -> None:
         plt.figure()
         plt.imshow(self.data, cmap="binary")
         plt.show()
 
-    def draw_maze_path(self):
+    def draw_maze_path(self) -> None:
         plt.figure()
         plt.imshow(self.data, cmap="binary")  # maze
 
@@ -117,11 +117,11 @@ class Maze:
 
 class MazeTemplate:
     @staticmethod
-    def empty(n):
+    def empty(n: int) -> Maze:
         return Maze(np.zeros((n, n), dtype=bool))
 
     @staticmethod
-    def slalom(n):
+    def slalom(n: int) -> Maze:
         maze = MazeTemplate.empty(n)
         idx = n//5
         w = n//10  # width
@@ -133,7 +133,7 @@ class MazeTemplate:
         return maze
 
     @staticmethod
-    def random_obstacles(template, max_obstacles):
+    def random_obstacles(template: Maze, max_obstacles: int) -> Maze:
         tmp_maze = Maze(np.copy(template.data))
         n, m = template.data.shape
         obstacles = 0
@@ -153,10 +153,3 @@ class MazeTemplate:
                     tmp_maze.data[x, y] = False
 
         return template
-
-
-maze = Maze()
-maze.load_maze_csv("./data/maze_3.csv")
-maze.draw_maze()
-print(maze.incidence_matrix().todense())
-maze.draw_maze_path()
