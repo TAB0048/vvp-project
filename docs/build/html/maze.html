@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>maze package &mdash; maze now documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=1a786a86"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            maze
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">maze package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-maze.maze">maze.maze module</a><ul>
+<li><a class="reference internal" href="#maze.maze.Maze"><code class="docutils literal notranslate"><span class="pre">Maze</span></code></a><ul>
+<li><a class="reference internal" href="#maze.maze.Maze.dijkstra"><code class="docutils literal notranslate"><span class="pre">Maze.dijkstra()</span></code></a></li>
+<li><a class="reference internal" href="#maze.maze.Maze.draw_maze"><code class="docutils literal notranslate"><span class="pre">Maze.draw_maze()</span></code></a></li>
+<li><a class="reference internal" href="#maze.maze.Maze.draw_maze_path"><code class="docutils literal notranslate"><span class="pre">Maze.draw_maze_path()</span></code></a></li>
+<li><a class="reference internal" href="#maze.maze.Maze.find_shortest_path"><code class="docutils literal notranslate"><span class="pre">Maze.find_shortest_path()</span></code></a></li>
+<li><a class="reference internal" href="#maze.maze.Maze.incidence_matrix"><code class="docutils literal notranslate"><span class="pre">Maze.incidence_matrix()</span></code></a></li>
+<li><a class="reference internal" href="#maze.maze.Maze.load_maze_csv"><code class="docutils literal notranslate"><span class="pre">Maze.load_maze_csv()</span></code></a></li>
+<li><a class="reference internal" href="#maze.maze.Maze.save_maze_csv"><code class="docutils literal notranslate"><span class="pre">Maze.save_maze_csv()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-maze.maze_templates">maze.maze_templates module</a><ul>
+<li><a class="reference internal" href="#maze.maze_templates.MazeTemplate"><code class="docutils literal notranslate"><span class="pre">MazeTemplate</span></code></a><ul>
+<li><a class="reference internal" href="#maze.maze_templates.MazeTemplate.empty"><code class="docutils literal notranslate"><span class="pre">MazeTemplate.empty()</span></code></a></li>
+<li><a class="reference internal" href="#maze.maze_templates.MazeTemplate.lines"><code class="docutils literal notranslate"><span class="pre">MazeTemplate.lines()</span></code></a></li>
+<li><a class="reference internal" href="#maze.maze_templates.MazeTemplate.random_obstacles"><code class="docutils literal notranslate"><span class="pre">MazeTemplate.random_obstacles()</span></code></a></li>
+<li><a class="reference internal" href="#maze.maze_templates.MazeTemplate.slalom"><code class="docutils literal notranslate"><span class="pre">MazeTemplate.slalom()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-maze">Module contents</a><ul>
+<li><a class="reference internal" href="#maze.Maze"><code class="docutils literal notranslate"><span class="pre">Maze</span></code></a><ul>
+<li><a class="reference internal" href="#maze.Maze.dijkstra"><code class="docutils literal notranslate"><span class="pre">Maze.dijkstra()</span></code></a></li>
+<li><a class="reference internal" href="#maze.Maze.draw_maze"><code class="docutils literal notranslate"><span class="pre">Maze.draw_maze()</span></code></a></li>
+<li><a class="reference internal" href="#maze.Maze.draw_maze_path"><code class="docutils literal notranslate"><span class="pre">Maze.draw_maze_path()</span></code></a></li>
+<li><a class="reference internal" href="#maze.Maze.find_shortest_path"><code class="docutils literal notranslate"><span class="pre">Maze.find_shortest_path()</span></code></a></li>
+<li><a class="reference internal" href="#maze.Maze.incidence_matrix"><code class="docutils literal notranslate"><span class="pre">Maze.incidence_matrix()</span></code></a></li>
+<li><a class="reference internal" href="#maze.Maze.load_maze_csv"><code class="docutils literal notranslate"><span class="pre">Maze.load_maze_csv()</span></code></a></li>
+<li><a class="reference internal" href="#maze.Maze.save_maze_csv"><code class="docutils literal notranslate"><span class="pre">Maze.save_maze_csv()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#maze.MazeTemplate"><code class="docutils literal notranslate"><span class="pre">MazeTemplate</span></code></a><ul>
+<li><a class="reference internal" href="#maze.MazeTemplate.empty"><code class="docutils literal notranslate"><span class="pre">MazeTemplate.empty()</span></code></a></li>
+<li><a class="reference internal" href="#maze.MazeTemplate.lines"><code class="docutils literal notranslate"><span class="pre">MazeTemplate.lines()</span></code></a></li>
+<li><a class="reference internal" href="#maze.MazeTemplate.random_obstacles"><code class="docutils literal notranslate"><span class="pre">MazeTemplate.random_obstacles()</span></code></a></li>
+<li><a class="reference internal" href="#maze.MazeTemplate.slalom"><code class="docutils literal notranslate"><span class="pre">MazeTemplate.slalom()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">maze</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">maze package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/maze.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="maze-package">
+<h1>maze package<a class="headerlink" href="#maze-package" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-maze.maze">
+<span id="maze-maze-module"></span><h2>maze.maze module<a class="headerlink" href="#module-maze.maze" title="Link to this heading"></a></h2>
+<p>Module to define maze.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="maze.maze.Maze">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">maze.maze.</span></span><span class="sig-name descname"><span class="pre">Maze</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#maze.maze.Maze" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Class representing a maze.</p>
+<p>It contains maze data, it’s start position (upper left)
+and end position (lower right).</p>
+<p>It allows user to load data from and save as CSV file, generate incidence
+matrix and find shortest path from start to end.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>ndarray</em><em> | </em><em>None</em>) – </p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="maze.maze.Maze.dijkstra">
+<span class="sig-name descname"><span class="pre">dijkstra</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">incidence_matrix</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#maze.maze.Maze.dijkstra" title="Link to this definition"></a></dt>
+<dd><p>Performs the Dijkstra’s algorithm to find the shortest path
+in the maze.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>indicence_matrix (sparse.lil_matrix): The incidence matrix</dt><dd><p>of the maze.</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><p>np.ndarray: An array containing cells of the shortest path.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>incidence_matrix</strong> (<em>lil_matrix</em>) – </p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>ndarray</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="maze.maze.Maze.draw_maze">
+<span class="sig-name descname"><span class="pre">draw_maze</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#maze.maze.Maze.draw_maze" title="Link to this definition"></a></dt>
+<dd><p>Creates a picture of the maze only (without any path).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="maze.maze.Maze.draw_maze_path">
+<span class="sig-name descname"><span class="pre">draw_maze_path</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#maze.maze.Maze.draw_maze_path" title="Link to this definition"></a></dt>
+<dd><p>Creates a picture of the maze, found shortest path included.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="maze.maze.Maze.find_shortest_path">
+<span class="sig-name descname"><span class="pre">find_shortest_path</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#maze.maze.Maze.find_shortest_path" title="Link to this definition"></a></dt>
+<dd><p>Finds the shortest path from upper left corner to lower right corner
+of the maze using incidence matrix and Dijkstra’s algorithm.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>None</p>
+</dd>
+<dt>Returns:</dt><dd><p>list: A list with incides representing the shortest path.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="maze.maze.Maze.incidence_matrix">
+<span class="sig-name descname"><span class="pre">incidence_matrix</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#maze.maze.Maze.incidence_matrix" title="Link to this definition"></a></dt>
+<dd><p>Generates an incidence matrix of the maze.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>None</p>
+</dd>
+<dt>Returns:</dt><dd><p>sparse.lil_matrix: The incidence matrix of the maze.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>lil_matrix</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="maze.maze.Maze.load_maze_csv">
+<span class="sig-name descname"><span class="pre">load_maze_csv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#maze.maze.Maze.load_maze_csv" title="Link to this definition"></a></dt>
+<dd><p>Loads maze data from a CSV file.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>file_name (str): The path to the CSV file with maze data.</p>
+</dd>
+<dt>Returns:</dt><dd><p>None</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>file_name</strong> (<em>str</em>) – </p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="maze.maze.Maze.save_maze_csv">
+<span class="sig-name descname"><span class="pre">save_maze_csv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#maze.maze.Maze.save_maze_csv" title="Link to this definition"></a></dt>
+<dd><p>Saves the maze as a CSV file.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>file_name (str): The name of the new CSV file.</p>
+</dd>
+<dt>Returns:</dt><dd><p>None</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>file_name</strong> (<em>str</em>) – </p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-maze.maze_templates">
+<span id="maze-maze-templates-module"></span><h2>maze.maze_templates module<a class="headerlink" href="#module-maze.maze_templates" title="Link to this heading"></a></h2>
+<p>Module to define maze templates.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="maze.maze_templates.MazeTemplate">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">maze.maze_templates.</span></span><span class="sig-name descname"><span class="pre">MazeTemplate</span></span><a class="headerlink" href="#maze.maze_templates.MazeTemplate" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Class representing templates for mazes.</p>
+<p>It allows user to generate mazes from templates and add obstacles to it.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="maze.maze_templates.MazeTemplate.empty">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">empty</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#maze.maze_templates.MazeTemplate.empty" title="Link to this definition"></a></dt>
+<dd><p>Creates an empty maze with given size.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>n (int): The size of the created maze.</p>
+</dd>
+<dt>Returns:</dt><dd><p>Maze: An empty maze with size n x n.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>n</strong> (<em>int</em>) – </p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#maze.maze.Maze" title="maze.maze.Maze"><em>Maze</em></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="maze.maze_templates.MazeTemplate.lines">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">lines</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#maze.maze_templates.MazeTemplate.lines" title="Link to this definition"></a></dt>
+<dd><p>Creates a maze with line-shaped obstacles, each line with only one cell
+to go through.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>n (int): The size of the created maze.</p>
+</dd>
+<dt>Returns:</dt><dd><p>Maze: A new maze with size n x n and line-shaped obstacles.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>n</strong> (<em>int</em>) – </p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#maze.maze.Maze" title="maze.maze.Maze"><em>Maze</em></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="maze.maze_templates.MazeTemplate.random_obstacles">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">random_obstacles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">template</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_obstacles</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#maze.maze_templates.MazeTemplate.random_obstacles" title="Link to this definition"></a></dt>
+<dd><p>Generates random obstacles to existing maze template and checks
+if maze still has solution (path).</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>template (Maze): The maze we add obstacles to.
+max_obstacles (int): The maximum amount of new obstacles.</p>
+</dd>
+<dt>Returns:</dt><dd><p>Maze: Modified maze with new obstacles.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>template</strong> (<a class="reference internal" href="#maze.maze.Maze" title="maze.maze.Maze"><em>Maze</em></a>) – </p></li>
+<li><p><strong>max_obstacles</strong> (<em>int</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#maze.maze.Maze" title="maze.maze.Maze"><em>Maze</em></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="maze.maze_templates.MazeTemplate.slalom">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">slalom</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#maze.maze_templates.MazeTemplate.slalom" title="Link to this definition"></a></dt>
+<dd><p>Creates a maze with two L-shaped obstacles (so that the path
+is at least S-shaped).</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>n (int): The size of the created maze.</p>
+</dd>
+<dt>Returns:</dt><dd><p>Maze: A new maze with size n x n and L-shaped obstacles.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>n</strong> (<em>int</em>) – </p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#maze.maze.Maze" title="maze.maze.Maze"><em>Maze</em></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-maze">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-maze" title="Link to this heading"></a></h2>
+<p>This is a maze package.</p>
+<p>It contains following modules:
+- maze: contains a Maze class
+- maze_templates: containcs a MazeTemplate class</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="maze.Maze">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">maze.</span></span><span class="sig-name descname"><span class="pre">Maze</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#maze.Maze" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Class representing a maze.</p>
+<p>It contains maze data, it’s start position (upper left)
+and end position (lower right).</p>
+<p>It allows user to load data from and save as CSV file, generate incidence
+matrix and find shortest path from start to end.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>ndarray</em><em> | </em><em>None</em>) – </p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="maze.Maze.dijkstra">
+<span class="sig-name descname"><span class="pre">dijkstra</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">incidence_matrix</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#maze.Maze.dijkstra" title="Link to this definition"></a></dt>
+<dd><p>Performs the Dijkstra’s algorithm to find the shortest path
+in the maze.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>indicence_matrix (sparse.lil_matrix): The incidence matrix</dt><dd><p>of the maze.</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><p>np.ndarray: An array containing cells of the shortest path.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>incidence_matrix</strong> (<em>lil_matrix</em>) – </p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>ndarray</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="maze.Maze.draw_maze">
+<span class="sig-name descname"><span class="pre">draw_maze</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#maze.Maze.draw_maze" title="Link to this definition"></a></dt>
+<dd><p>Creates a picture of the maze only (without any path).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="maze.Maze.draw_maze_path">
+<span class="sig-name descname"><span class="pre">draw_maze_path</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#maze.Maze.draw_maze_path" title="Link to this definition"></a></dt>
+<dd><p>Creates a picture of the maze, found shortest path included.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="maze.Maze.find_shortest_path">
+<span class="sig-name descname"><span class="pre">find_shortest_path</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#maze.Maze.find_shortest_path" title="Link to this definition"></a></dt>
+<dd><p>Finds the shortest path from upper left corner to lower right corner
+of the maze using incidence matrix and Dijkstra’s algorithm.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>None</p>
+</dd>
+<dt>Returns:</dt><dd><p>list: A list with incides representing the shortest path.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="maze.Maze.incidence_matrix">
+<span class="sig-name descname"><span class="pre">incidence_matrix</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#maze.Maze.incidence_matrix" title="Link to this definition"></a></dt>
+<dd><p>Generates an incidence matrix of the maze.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>None</p>
+</dd>
+<dt>Returns:</dt><dd><p>sparse.lil_matrix: The incidence matrix of the maze.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>lil_matrix</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="maze.Maze.load_maze_csv">
+<span class="sig-name descname"><span class="pre">load_maze_csv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#maze.Maze.load_maze_csv" title="Link to this definition"></a></dt>
+<dd><p>Loads maze data from a CSV file.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>file_name (str): The path to the CSV file with maze data.</p>
+</dd>
+<dt>Returns:</dt><dd><p>None</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>file_name</strong> (<em>str</em>) – </p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="maze.Maze.save_maze_csv">
+<span class="sig-name descname"><span class="pre">save_maze_csv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#maze.Maze.save_maze_csv" title="Link to this definition"></a></dt>
+<dd><p>Saves the maze as a CSV file.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>file_name (str): The name of the new CSV file.</p>
+</dd>
+<dt>Returns:</dt><dd><p>None</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>file_name</strong> (<em>str</em>) – </p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="maze.MazeTemplate">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">maze.</span></span><span class="sig-name descname"><span class="pre">MazeTemplate</span></span><a class="headerlink" href="#maze.MazeTemplate" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Class representing templates for mazes.</p>
+<p>It allows user to generate mazes from templates and add obstacles to it.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="maze.MazeTemplate.empty">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">empty</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#maze.MazeTemplate.empty" title="Link to this definition"></a></dt>
+<dd><p>Creates an empty maze with given size.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>n (int): The size of the created maze.</p>
+</dd>
+<dt>Returns:</dt><dd><p>Maze: An empty maze with size n x n.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>n</strong> (<em>int</em>) – </p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#maze.maze.Maze" title="maze.maze.Maze"><em>Maze</em></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="maze.MazeTemplate.lines">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">lines</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#maze.MazeTemplate.lines" title="Link to this definition"></a></dt>
+<dd><p>Creates a maze with line-shaped obstacles, each line with only one cell
+to go through.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>n (int): The size of the created maze.</p>
+</dd>
+<dt>Returns:</dt><dd><p>Maze: A new maze with size n x n and line-shaped obstacles.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>n</strong> (<em>int</em>) – </p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#maze.maze.Maze" title="maze.maze.Maze"><em>Maze</em></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="maze.MazeTemplate.random_obstacles">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">random_obstacles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">template</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_obstacles</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#maze.MazeTemplate.random_obstacles" title="Link to this definition"></a></dt>
+<dd><p>Generates random obstacles to existing maze template and checks
+if maze still has solution (path).</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>template (Maze): The maze we add obstacles to.
+max_obstacles (int): The maximum amount of new obstacles.</p>
+</dd>
+<dt>Returns:</dt><dd><p>Maze: Modified maze with new obstacles.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>template</strong> (<a class="reference internal" href="#maze.maze.Maze" title="maze.maze.Maze"><em>Maze</em></a>) – </p></li>
+<li><p><strong>max_obstacles</strong> (<em>int</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#maze.maze.Maze" title="maze.maze.Maze"><em>Maze</em></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="maze.MazeTemplate.slalom">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">slalom</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#maze.MazeTemplate.slalom" title="Link to this definition"></a></dt>
+<dd><p>Creates a maze with two L-shaped obstacles (so that the path
+is at least S-shaped).</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>n (int): The size of the created maze.</p>
+</dd>
+<dt>Returns:</dt><dd><p>Maze: A new maze with size n x n and L-shaped obstacles.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>n</strong> (<em>int</em>) – </p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#maze.maze.Maze" title="maze.maze.Maze"><em>Maze</em></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Alexandr Tabara.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
