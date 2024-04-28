@@ -84,9 +84,8 @@ class MazeTemplate:
         """
         tmp_maze = Maze(np.copy(template.data))
         n, m = template.data.shape
-        obstacles = 0
 
-        while obstacles < max_obstacles:
+        for i in range(max_obstacles):
             x = np.random.randint(0, n)
             y = np.random.randint(0, n)
 
@@ -96,7 +95,6 @@ class MazeTemplate:
 
                 if len(path) > 0:
                     template.data[x, y] = True
-                    obstacles += 1
                 else:
                     tmp_maze.data[x, y] = False
 

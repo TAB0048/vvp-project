@@ -173,20 +173,19 @@ class Maze:
         """
         Creates a picture of the maze, found shortest path included.
         """
-        plt.figure()
-        plt.imshow(self.data, cmap="binary")  # maze
-
         shortest_path = self.find_shortest_path()
 
         if shortest_path == []:
             print("Path doesn't exist.")
-            return
+        else:
+            plt.figure()
+            plt.imshow(self.data, cmap="binary")  # maze
 
-        path_matrix = np.zeros_like(self.data)
-        row, col = np.divmod(shortest_path, self.data.shape[0])
-        path_matrix[row, col] = 1
+            path_matrix = np.zeros_like(self.data)
+            row, col = np.divmod(shortest_path, self.data.shape[0])
+            path_matrix[row, col] = 1
 
-        path_colors = ListedColormap([(0, 0, 0, 0), "red"])
-        plt.imshow(path_matrix, cmap=path_colors)  # path
+            path_colors = ListedColormap([(0, 0, 0, 0), "red"])
+            plt.imshow(path_matrix, cmap=path_colors)  # path
 
-        plt.show()
+            plt.show()
