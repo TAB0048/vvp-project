@@ -48,6 +48,28 @@ class MazeTemplate:
         return maze
 
     @staticmethod
+    def lines(n: int) -> Maze:
+        """
+        Creates a maze with line-shaped obstacles, each line with only one cell
+        to go through.
+
+        Args:
+            n (int): The size of the created maze.
+
+        Returns:
+            Maze: A new maze with size n x n and line-shaped obstacles.
+        """
+        maze = MazeTemplate.empty(n)
+
+        maze.data[1:n:4] = 1
+        v = np.random.randint(0, n, n//4)
+        for row, col in enumerate(v):
+            maze.data[4 * row + 1, col] = 0
+
+        maze.data[n - 1, n - 1] = 0
+        return maze
+
+    @staticmethod
     def random_obstacles(template: Maze, max_obstacles: int) -> Maze:
         """
         Generates random obstacles to existing maze template and checks
