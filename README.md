@@ -1,32 +1,26 @@
 # Hledání nejkratší cesty v bludišti
 
-## Textový popis
+## Description
 
-Tento projekt se zabývá řešením (hledáním nejkratší cesty) a také
-základním generováním bludišť. Základním vstupem bude bludiště
-$n\times n$, přičemž vstup do bludiště bude vždy levý horní roh a výstup
-bude vždy pravý dolní roh. Z jedné buňky do druhé se lze dostat pouze
-přes společnou hranu (nikoliv přes roh). Cílem projektu je implementovat
-algoritmy pro načítání, hledání nejkratší cesty a generování bludiště.
+This project is about solving and generating mazes. The main input is a maze $n\times n$, where the start is the upper left corner and the end is the bottom right corner. It is only possible to get from one cell to another through an edge (not through a corner). This project implements algorithms for loading mazes, finding shortest path and generating mazes.
 
-Na začátku bude implementována funkce pro načítání bludiště z CSV
-souboru. Tato funkce bude umět načítat bludiště o libovolném rozměru
-$n\times n$ a uložit ho do paměti v podobě NumPy matice s True/False
-hodnotami (True = buňka je neprůchozí). Poté bude implementován
-algoritmus pro hledání nejkratší cesty. Poslední částí bude vytvoření
-generátoru bludiště za použití algoritmu pro hledání nejkratší cesty.
+Loaded maze is saved as a NumPy matrix with True/False values (True = cell can be passed-through).
+The output, as a picture, contains three colors of cells: 
+- black = can't pass through 
+- white = can pass through 
+- red = the shortest path
 
-Výstup bude formou obrázku (černá = neprostupná část, bílá = průchozí,
-červená = nejkratší cesta).
+## Functionalities
 
-## Funcionality
+- loading a maze from a CSV file
+- finding the shortest path from start to end in the following two steps:
+  - creating an incidence matrix
+  - finding the shortest path using Dijkstra's algorithm
+- draw the maze as a black-and-white picture, with or without solution (colored red)
+- generating a new maze (where the shortest path exists):
+  - there are three available templates: empty, slalom and lines
+  - obstacles can be added to the predefined templates
 
-- Implementovat načítání bludiště z CSV souboru
-- Implementovat algoritmus pro hledání nejkratší cesty (mezi levým horním rohem a pravým dolním rohem) za použití knihovny NumPy,který bude pracovat v následujících dvou krocích:
-  - Sestavení incidenční matice
-  - Hledání nejkratší cesty např. pomocí Dijkstrova algoritmu (jsou i jiné možnosti jako hledání do šířky, výběr je na vás)
-- Zapsat bludiště a nalezenou cestu do černobílého obrázku, kde cesta bude vyznačena červeně
-- Vytvořit funkci pro generování bludiště tak, aby mělo řešení (tj. aby existovala cesta mezi levým horním a pravým dolním rohem)
-  - funkce začne s nějakou šablonou (předdefinované v kódu) a poté bude zaplňovat bludiště v náhodných místech a kontrolovat, zda je stále průchozí
-  - šablon bude více (např. empty = volné bludiště, slalom = bariéry
-    aby cesta musela minimálně mít tvar S, \...) - budou s obrázky ukázané v Readme nebo examples.ipynb
+## Examples
+
+Examples of using mentioned functionalities are demonstrated in the examples.ipynb file.
