@@ -1,4 +1,4 @@
-# Hledání nejkratší cesty v bludišti
+# Finding the shortest path in a maze
 
 ## Description
 
