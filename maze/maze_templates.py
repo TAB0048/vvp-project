@@ -82,20 +82,22 @@ class MazeTemplate:
         Returns:
             Maze: Modified maze with new obstacles.
         """
-        tmp_maze = Maze(np.copy(template.data))
         n, m = template.data.shape
+        path = []
 
-        for i in range(max_obstacles):
-            x = np.random.randint(0, n)
-            y = np.random.randint(0, n)
+        while len(path) == 0:
+            rows = np.random.randint(0, n, max_obstacles)
+            cols = np.random.randint(0, n, max_obstacles)
 
-            if not tmp_maze.data[x, y]:
-                tmp_maze.data[x, y] = True
-                path = tmp_maze.find_shortest_path()
+            if not (template.data[rows, cols]).all():
+                tmp_data = np.copy(template.data)
+
+                template.data[rows, cols] = True
+                path = template.find_shortest_path()
 
                 if len(path) > 0:
-                    template.data[x, y] = True
+                    break
                 else:
-                    tmp_maze.data[x, y] = False
+                    template.data = tmp_data
 
         return template
