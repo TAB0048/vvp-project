@@ -4,7 +4,7 @@
 
 This project is about solving and generating mazes. The main input is a maze $n\times n$, where the start is the upper left corner and the end is the bottom right corner. It is only possible to get from one cell to another through an edge (not through a corner). This project implements algorithms for loading mazes, finding shortest path and generating mazes.
 
-Loaded maze is saved as a NumPy matrix with True/False values (True = cell can be passed-through).
+Loaded maze is saved as a NumPy matrix with True/False values (True = cell can't be passed-through).
 The output, as a picture, contains three colors of cells: 
 - black = can't pass through 
 - white = can pass through 
